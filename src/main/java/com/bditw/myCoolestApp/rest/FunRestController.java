@@ -9,4 +9,13 @@ public class FunRestController {
     public String helloWorld(){
         return "Hello World";
     }
+
+    @GetMapping("/BillionerFam")
+    public String BillionerFam(){
+        return "Gafirita James";
+    }
+    @GetMapping("/NumberOneThing")
+    public String NumberOneThing(){
+        return "Number One thing is Jesus";
+    }
 }
