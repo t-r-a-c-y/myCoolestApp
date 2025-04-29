@@ -1,5 +1,8 @@
 package com.bditw.myCoolestApp;
 
+import com.bditw.myCoolestApp.model.Student;
+import com.bditw.myCoolestApp.repository.StudentDAO;
+import com.bditw.myCoolestApp.repository.StudentDAOImp;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -13,10 +16,18 @@ public class MyCoolestAppApplication {
 	}
 
 	@Bean
-	public CommandLineRunner commandLineRunner(String[] args) {
-		return runner->{
-			System.out.println("Hello World");
-		};
+	public CommandLineRunner commandLineRunner(StudentDAO studentDAO) {
+		return runner->
+				createStudent(studentDAO);
 	}
 
+	public void createStudent(StudentDAO studentDAO) {
+
+		System.out.println("We are going to create a new student");
+		Student student = new Student("John", "Doe", "john@doe.com");
+
+		studentDAO.save(student);
+		System.out.println("We have saved a new student with id " + student.getId());
+
+	}
 }

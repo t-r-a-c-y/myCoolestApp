@@ -1,4 +1,7 @@
 package com.bditw.myCoolestApp.repository;
 
-public class StudentDAO {
+import com.bditw.myCoolestApp.model.Student;
+
+public interface StudentDAO {
+    void save(Student student);
 }
