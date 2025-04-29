@@ -2,6 +2,7 @@ package com.bditw.myCoolestApp.model;
 
 import com.bditw.myCoolestApp.common.Coach;
 import jakarta.persistence.*;
+import org.springframework.lang.NonNull;
 
 @Entity
 @Table(name="Student")
@@ -67,11 +68,14 @@ public class Student {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
 
     private int id;
-    @Column(name = "first_name")
+    @Column(name = "first_name" )
+    @NonNull
     private String firstName;
     @Column(name= "last_name")
+    @NonNull
     private String lastName;
     @Column(name= "email")
+    @NonNull
     private String email;
 
 }

@@ -18,25 +18,33 @@ public class MyCoolestAppApplication {
 	}
 
 	@Bean
-	public CommandLineRunner commandLineRunner(StudentDAO studentDAO, TeacherDAO teacherDAO) {
+	public CommandLineRunner commandLineRunner( StudentDAO studentDAO, TeacherDAO teacherDAO) {
 		return runner->
-				createStudent(studentDAO);
+				readStudentById(studentDAO);
+//				createStudent(studentDAO);
     }
+
+	private void readStudentById(StudentDAO studentDAO) {
+
+		System.out.println("Creating Student");
+		Student student = new Student("Teta","teatte","tttt@gmail.com");
+		studentDAO.save(student);
+		System.out.println("Saved the student"+ student.getId());
+		int theId = student.getId();
+		Student theStudent = studentDAO.findById(theId);
+		System.out.println(theStudent);
+	}
 
 	public void createStudent(StudentDAO studentDAO) {
 
 		System.out.println("We are going to create a new student");
 		Student student = new Student("John", "Doe", "john@doe.com");
+		Student student2 = new Student("Jane", "Doe", "jane@doe.com");
 
 		studentDAO.save(student);
+		studentDAO.save(student2);
 		System.out.println("We have saved a new student with id " + student.getId());
 
 	}
-	public void createTeacher(TeacherDAO teacherDAO) {
-		System.out.println("We are going to create a new teacher");
-		Teacher teacher = new Teacher("tracy", "tesi", "john2@doe.com","Java");
-		teacherDAO.save(teacher);
-		System.out.println("We have saved a new teacher with id " + teacher.getId());
 
-	}
 }
