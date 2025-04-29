@@ -10,6 +10,8 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
+import java.util.List;
+
 @SpringBootApplication
 public class MyCoolestAppApplication {
 
@@ -20,9 +22,17 @@ public class MyCoolestAppApplication {
 	@Bean
 	public CommandLineRunner commandLineRunner( StudentDAO studentDAO, TeacherDAO teacherDAO) {
 		return runner->
-				readStudentById(studentDAO);
+				gettingAllStudents(studentDAO);
+//				readStudentById(studentDAO);
 //				createStudent(studentDAO);
     }
+
+	private void gettingAllStudents(StudentDAO studentDAO) {
+		List<Student> students = studentDAO.findAll();
+		for(Student student : students) {
+			System.out.println(student);
+		}
+	}
 
 	private void readStudentById(StudentDAO studentDAO) {
 
