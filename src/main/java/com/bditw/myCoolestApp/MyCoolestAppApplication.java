@@ -22,10 +22,18 @@ public class MyCoolestAppApplication {
 	@Bean
 	public CommandLineRunner commandLineRunner( StudentDAO studentDAO, TeacherDAO teacherDAO) {
 		return runner->
-				gettingAllStudents(studentDAO);
+				gettingStudentByLastName(studentDAO);
+//				gettingAllStudents(studentDAO);
 //				readStudentById(studentDAO);
 //				createStudent(studentDAO);
     }
+
+	private void gettingStudentByLastName(StudentDAO studentDAO) {
+		List<Student> students = studentDAO.findByLastName("Doe");
+		for(Student student : students) {
+			System.out.println(student);
+		}
+	}
 
 	private void gettingAllStudents(StudentDAO studentDAO) {
 		List<Student> students = studentDAO.findAll();
