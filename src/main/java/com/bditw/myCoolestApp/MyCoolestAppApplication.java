@@ -22,13 +22,19 @@ public class MyCoolestAppApplication {
 	@Bean
 	public CommandLineRunner commandLineRunner( StudentDAO studentDAO, TeacherDAO teacherDAO) {
 		return runner->
-				deleteStudent(studentDAO);
+				deleteAllStudent(studentDAO);
+//				deleteStudent(studentDAO);
 //				updatingTheStudent(studentDAO);
 //				gettingStudentByLastName(studentDAO);
 //				gettingAllStudents(studentDAO);
 //				readStudentById(studentDAO);
 //				createStudent(studentDAO);
     }
+
+	private void deleteAllStudent(StudentDAO studentDAO) {
+		int numDeleted = studentDAO.deleteAll();
+		System.out.println(numDeleted);
+	}
 
 	private void deleteStudent(StudentDAO studentDAO) {
 		int id=3;
