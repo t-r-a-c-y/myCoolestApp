@@ -1,40 +1,76 @@
 package com.bditw.myCoolestApp.model;
 
+import jakarta.persistence.*;
+
+@Entity
+@Table(name="Employee")
 public class Employee {
-
-
-    public String getFirstName() {
-        return firstName;
+    public int getId() {
+        return id;
     }
 
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
+    public void setId(int id) {
+        this.id = id;
     }
 
-    public String getLastName() {
-        return lastName;
+    public String getFirstname() {
+        return firstname;
     }
 
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
+    public void setFirstname(String firstname) {
+        this.firstname = firstname;
     }
 
-    public int getAge() {
-        return age;
+    public String getLastname() {
+        return lastname;
     }
 
-    public void setAge(int age) {
-        this.age = age;
+    public void setLastname(String lastname) {
+        this.lastname = lastname;
     }
 
-    public Employee(String firstName, String lastName, int age) {
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.age = age;
+    public String getEmail() {
+        return email;
     }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public Employee(int id, String firstname, String lastname, String email) {
+        this.id = id;
+        this.firstname = firstname;
+        this.lastname = lastname;
+        this.email = email;
+    }
+
+    public Employee(String firstname, String lastname, String email) {
+        this.firstname = firstname;
+        this.lastname = lastname;
+        this.email = email;
+    }
+
+    @Override
+    public String toString() {
+        return "Employee{" +
+                "id=" + id +
+                ", firstname='" + firstname + '\'' +
+                ", lastname='" + lastname + '\'' +
+                ", email='" + email + '\'' +
+                '}';
+    }
+
     public Employee() {}
 
-    private String firstName;
-    private String lastName;
-    private int age;
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name="Id")
+    private int id;
+    @Column(name = "first_name", nullable = false)
+    private String firstname;
+    @Column(name="last_name",nullable=false)
+    private String lastname;
+    @Column(name = "email", unique = true, nullable = false)
+    private String email;
+
 }
