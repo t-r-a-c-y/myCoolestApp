@@ -24,10 +24,11 @@ public class EmployeeController {
         return employeeService.findEmployeeById(employeesId);
     }
 
-    @PostMapping("/employees")
-    public Employee addEmployee(@RequestBody Employee employee) {
+   @PostMapping("/employees")
+   public Employee saveEmployee(@RequestBody Employee employee) {
+        employee.setId(0);
         return employeeService.saveEmployee(employee);
-    }
+   }
 
     @DeleteMapping("/employees/{employeesId}")
     public void deleteEmployee(@PathVariable int employeesId) {

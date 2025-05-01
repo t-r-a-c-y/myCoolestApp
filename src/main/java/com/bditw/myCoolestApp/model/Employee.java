@@ -3,7 +3,7 @@ package com.bditw.myCoolestApp.model;
 import jakarta.persistence.*;
 
 @Entity
-@Table(name="Employee")
+@Table(name = "employee")
 public class Employee {
     public int getId() {
         return id;
@@ -37,12 +37,6 @@ public class Employee {
         this.email = email;
     }
 
-    public Employee(int id, String firstname, String lastname, String email) {
-        this.id = id;
-        this.firstname = firstname;
-        this.lastname = lastname;
-        this.email = email;
-    }
 
     public Employee(String firstname, String lastname, String email) {
         this.firstname = firstname;
@@ -63,8 +57,8 @@ public class Employee {
     public Employee() {}
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name="Id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name="id")
     private int id;
     @Column(name = "first_name", nullable = false)
     private String firstname;
