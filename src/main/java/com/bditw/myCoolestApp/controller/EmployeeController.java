@@ -3,9 +3,7 @@ package com.bditw.myCoolestApp.controller;
 import com.bditw.myCoolestApp.model.Employee;
 import com.bditw.myCoolestApp.repository.EmployeeDAO;
 import com.bditw.myCoolestApp.service.EmployeeService;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -21,5 +19,18 @@ public class EmployeeController {
     public List<Employee> findAllEmployees() {
         return employeeService.findAllEmployees();
     }
+    @GetMapping("/employees/{employeesId}")
+    public Employee findEmployeeById(@PathVariable int employeesId) {
+        return employeeService.findEmployeeById(employeesId);
+    }
 
+    @PostMapping("/employees")
+    public Employee addEmployee(@RequestBody Employee employee) {
+        return employeeService.saveEmployee(employee);
+    }
+
+    @DeleteMapping("/employees/{employeesId}")
+    public void deleteEmployee(@PathVariable int employeesId) {
+        employeeService.deleteEmployee(employeesId);
+    }
 }

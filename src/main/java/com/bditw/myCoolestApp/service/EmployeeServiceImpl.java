@@ -3,6 +3,7 @@ package com.bditw.myCoolestApp.service;
 import com.bditw.myCoolestApp.model.Employee;
 import com.bditw.myCoolestApp.repository.EmployeeDAO;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -22,11 +23,13 @@ public class EmployeeServiceImpl implements EmployeeService {
     }
 
     @Override
+    @Transactional
     public Employee saveEmployee(Employee employee) {
         return employeeDAO.saveEmployee(employee);
     }
 
     @Override
+    @Transactional
     public void deleteEmployee(int id) {
         employeeDAO.deleteEmployee(id);
     }
