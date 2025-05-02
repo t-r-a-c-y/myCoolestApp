@@ -5,6 +5,7 @@ import com.bditw.myCoolestApp.repository.TeacherDAO;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class TeacherServices implements TeacherSer{
@@ -18,4 +19,23 @@ public class TeacherServices implements TeacherSer{
     return teacherDAO.findAll();
     }
 
+    @Override
+    public Teacher findTeacherById(int id) {
+        Optional<Teacher> teacher = teacherDAO.findById(id);
+        return teacher.isPresent() ? teacher.get() : null;
+    }
+
+    @Override
+    public Teacher updateTeacher(Teacher theTeacher) {
+        return teacherDAO.save(theTeacher);
+    }
+
+    @Override
+    public void deleteTeacher(int theid) {
+        teacherDAO.deleteById(theid);
+    }
+    @Override
+    public Teacher saveTeacher(Teacher theTeacher) {
+        return teacherDAO.save(theTeacher);
+    }
 }
