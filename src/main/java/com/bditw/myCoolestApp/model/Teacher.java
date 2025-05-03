@@ -75,12 +75,12 @@ public class Teacher {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    @Column(name = "first_name",nullable = false)
+    @Column(name = "first_name", nullable = false)
     private String firstName;
-    @Column(name = "last_name",nullable = false)
+    @Column(name = "last_name")
     private String lastName;
-    @Column(name = "email",unique = true,nullable = false)
+    @Column(name = "email",unique = true)
     private String email;
-    @Column(name = "course",nullable = false)
+    @Column(name = "course")
     private String course;
 }
