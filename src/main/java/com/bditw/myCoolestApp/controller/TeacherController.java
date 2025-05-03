@@ -19,7 +19,7 @@ public class TeacherController {
         return teacherService.findAll();
     }
 
-    @GetMapping("/teachers/{teacherId")
+    @GetMapping("/teachers/{teacherId}")
     public Teacher getTeacher(@PathVariable int teacherId) {
         return teacherService.findTeacherById(teacherId);
     }

@@ -2,6 +2,7 @@ package com.bditw.myCoolestApp.service;
 
 import com.bditw.myCoolestApp.model.Teacher;
 import com.bditw.myCoolestApp.repository.TeacherDAO;
+import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -31,8 +32,11 @@ public class TeacherServices implements TeacherSer{
     }
 
     @Override
+    @Transactional
     public void deleteTeacher(int theid) {
-        teacherDAO.deleteById(theid);
+        Teacher teacher = teacherDAO.findById(theid)
+                .orElseThrow(() -> new RuntimeException("Teacher not found with id: " + theid));
+        teacherDAO.delete(teacher);
     }
     @Override
     public Teacher saveTeacher(Teacher theTeacher) {
