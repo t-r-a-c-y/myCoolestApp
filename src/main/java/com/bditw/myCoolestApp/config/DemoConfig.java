@@ -7,44 +7,54 @@ import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
+import org.springframework.security.provisioning.JdbcUserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
+
+import javax.sql.DataSource;
 
 @Configuration
 public class DemoConfig {
 
+
     @Bean
-    public InMemoryUserDetailsManager userDetailsManager() {
-        UserDetails john = User.builder()
-                .username("john")
-                .password("{noop}john")  // {noop} means plain text (no encoding)
-                .roles("WORK")
-                .build();
-
-        UserDetails mary = User.builder()
-                .username("mary")
-                .password("{noop}mary")
-                .roles("ADMIN")
-                .build();
-
-        UserDetails tracy = User.builder()
-                .username("tracy")
-                .password("{noop}tracy")
-                .roles("MANAGER")
-                .build();
-
-        return new InMemoryUserDetailsManager(john, mary, tracy);
+    public UserDetailsService userDetailsService(DataSource dataSource) {
+        return new JdbcUserDetailsManager(dataSource);
     }
+
+//    @Bean
+//    public InMemoryUserDetailsManager userDetailsManager() {
+//        UserDetails john = User.builder()
+//                .username("john")
+//                .password("{noop}test123")
+//                .roles("WORK") // Becomes ROLE_WORK
+//                .build();
+//
+//        UserDetails mary = User.builder()
+//                .username("mary")
+//                .password("{noop}test123")
+//                .roles("ADMIN") // Becomes ROLE_ADMIN
+//                .build();
+//
+//        UserDetails tracy = User.builder()
+//                .username("tracy")
+//                .password("{noop}test123")
+//                .roles("MANAGER") // Becomes ROLE_MANAGER
+//                .build();
+//
+//        return new InMemoryUserDetailsManager(john, mary, tracy);
+//    }
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http.authorizeHttpRequests(configurer ->
                         configurer
-                                .requestMatchers(HttpMethod.GET, "/employees").hasRole("WORK")
-                                .requestMatchers(HttpMethod.GET, "/employees/**").hasRole("WORK")
-                                .requestMatchers(HttpMethod.POST, "/employees").hasRole("MANAGER")
-                                .requestMatchers(HttpMethod.PUT, "/employees").hasRole("MANAGER")
-                                .requestMatchers(HttpMethod.DELETE, "/employees/**").hasRole("ADMIN")
+                                .requestMatchers(HttpMethod.GET, "/api/employees").hasRole("EMPLOYEE")
+                                .requestMatchers(HttpMethod.GET, "/api/employees/**").hasRole("EMPLOYEE")
+                                .requestMatchers(HttpMethod.POST, "/api/employees").hasRole("MANAGER")
+                                .requestMatchers(HttpMethod.PUT, "/api/employees").hasRole("MANAGER")
+                                .requestMatchers(HttpMethod.DELETE, "/api/employees/**").hasRole("ADMIN")
                 )
                 .httpBasic(Customizer.withDefaults())
                 .csrf(csrf -> csrf.disable());
