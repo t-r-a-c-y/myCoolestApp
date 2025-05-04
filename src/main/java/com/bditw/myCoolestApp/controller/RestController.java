@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 @Controller
 public class RestController {
-    @GetMapping("/")
+    @GetMapping("/helloW")
     public String helloWorld(Model model){
         model.addAttribute("theDate",java.time.LocalDate.now());
         return "helloWorld";

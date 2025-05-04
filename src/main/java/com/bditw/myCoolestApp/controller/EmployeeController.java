@@ -3,11 +3,12 @@ package com.bditw.myCoolestApp.controller;
 import com.bditw.myCoolestApp.model.Employee;
 import com.bditw.myCoolestApp.repository.EmployeeDAO;
 import com.bditw.myCoolestApp.service.EmployeeService;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@RestController
+@Controller
 @RequestMapping("/api")
 public class EmployeeController {
     private EmployeeService employeeService;
