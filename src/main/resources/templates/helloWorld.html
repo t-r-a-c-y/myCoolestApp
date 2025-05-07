@@ -5,7 +5,11 @@
     <link rel="stylesheet" th:href="@{/css/demo.css}" />
 </head>
 <body>
-<p>The name is <span th:text="${param.studentName}"></span> </p>
+<!--this is method one-->
+<!--<p>The name is <span th:text="${param.studentName}"></span> </p>-->
+
+<!--this is method 2-->
+<p>The name is <span th:text="${studentName}"></span> </p>
 </body>
 </html>
 
